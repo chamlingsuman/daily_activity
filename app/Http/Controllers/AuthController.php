@@ -16,7 +16,7 @@ class AuthController extends Controller
     private $_page = null;
     private $_data = [];
 
-    public function _construct()
+    public function __construct()
     {
     }
 
@@ -89,4 +89,3 @@ class AuthController extends Controller
         return view('auth.approval_page');
     }
 }
-

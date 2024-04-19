@@ -13,11 +13,21 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/login', 'AuthController@login')->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', 'AuthController@loginAction');
+
+Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
+Route::post('/signup', [AuthController::class, 'signupAction']);
+
 
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
-    
+    Route::resource('users', 'UserController');
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
